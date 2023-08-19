@@ -1,3 +1,4 @@
+import 'package:cook_instead/feed_element.dart';
 import 'package:cook_instead/firebase_options.dart';
 import 'package:cook_instead/recipe.dart';
 import 'package:cook_instead/info.dart';
@@ -7,6 +8,7 @@ import 'dart:convert';
 
 final storage =
     FirebaseStorage.instanceFor(bucket: "gs://cook-instead.appspot.com");
+
 
 Future<List<Recipe>> readRecipes() async {
   await Firebase.initializeApp(
@@ -19,10 +21,10 @@ Future<List<Recipe>> readRecipes() async {
     for (var file in files.items) {
       if (file.name.contains(RegExp(r'^[^\\\/:*?"<>|]+\.json$'))) {
         var filedata = await file.getData();
-        if(filedata == null){
+        if (filedata == null) {
           continue;
         }
-        
+
         final recipeJson = utf8.decode(filedata);
         final recipeDynamic = jsonDecode(recipeJson);
         final recipe = Recipe.fromJson(recipeDynamic);
@@ -44,7 +46,7 @@ Future<List<Info>> readInfos() async {
     for (var file in files.items) {
       if (file.name.contains(RegExp(r'^[^\\\/:*?"<>|]+\.json$'))) {
         var filedata = await file.getData();
-        if(filedata == null){
+        if (filedata == null) {
           continue;
         }
         final infoJson = utf8.decode(filedata);
@@ -54,3 +56,28 @@ Future<List<Info>> readInfos() async {
   }
   return infos;
 }
+
+// TODO: finish generic function attempt
+
+// Future<List<T>> readElements<T extends FeedElement>(String folder) async {
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+//   List<T> elements = [];
+//   final listResult = await storage.ref().child(folder).listAll();
+//   for (var folder in listResult.prefixes) {
+//     var files = await folder.listAll();
+//     for (var file in files.items) {
+//       if (file.name.contains(RegExp(r'^[^\\\/:*?"<>|]+\.json$'))) {
+//         var filedata = await file.getData();
+//         if (filedata == null) {
+//           continue;
+//         }
+//         final elementJson = utf8.decode(filedata);
+//         elements.add(T.fromJson(jsonDecode(elementJson)));
+//       }
+//     }
+//   }
+//   return elements;
+// }
+

@@ -1,5 +1,8 @@
-class Recipe {
+import 'package:cook_instead/feed_element.dart';
+
+class Recipe extends FeedElement {
   List<String> images = [];
+  List<String> imagesUrls = [];
   String title = "Recipe title";
   String subtitle = "Recipe subtitle";
   String maintext = "Recipe maintext";
@@ -12,6 +15,7 @@ class Recipe {
   Recipe(this.title, this.subtitle, this.maintext, this.ingredients,
       this.description, this.createdAt, this.color, this.tags);
 
+  @override
   factory Recipe.fromJson(dynamic json) {
     return Recipe(
         json['title'] as String,
