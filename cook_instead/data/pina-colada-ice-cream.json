@@ -1,0 +1,15 @@
+{
+    "images":["pina-colada-ingredients.png", "pinca-colada-ice-cream.jpg"],
+    "title" : "Pina Colada Ice Cream",
+    "subtitle" : "Cookinstructions",
+    "maintext" : "Cut the pineapple into small pieces and freeze them. Mix the frozen pineapple with the coconut milk and the rum. Put the mixture in the freezer for 2 hours. Stir the mixture every 30 minutes.",
+    "ingredients" : [
+        "1 pineapple",
+        "1 can of coconut milk",
+        "2 tablespoons of rum"
+    ],
+    "description" : "🍍🍹 Tropical Dreams in a Bowl: Healthy Piña Colada Ice Cream Recipe! 🍦✨ Transport your taste buds to a sun-soaked paradise with our guilt-free piña colada ice cream. Indulge in the creamy goodness of coconut and the refreshing sweetness of pineapple, all while nourishing your body with wholesome ingredients.",
+    "createdAt" : "2023-08-19T12:00:00.000Z",
+    "color": "#FFA500",
+    "tags" : ["icecream", "pineapple", "coconut", "rum"]
+}

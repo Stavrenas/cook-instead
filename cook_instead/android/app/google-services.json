@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "663620755530",
+    "firebase_url": "https://cook-instead-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "cook-instead",
+    "storage_bucket": "cook-instead.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663620755530:android:1fa5a1b65be9f0bb8a06b3",
+        "android_client_info": {
+          "package_name": "com.example.cook_instead"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663620755530-n3rj7ttgc909egpb6t53do561o43ugi8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbOna0DYOTnWnxuBG9k-nFSnBOR2fkwxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663620755530-n3rj7ttgc909egpb6t53do561o43ugi8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "663620755530-1esk6rq1e6bbeuqqov4or72amhastdrb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cookInstead"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
