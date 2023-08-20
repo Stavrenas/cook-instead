@@ -1,4 +1,4 @@
-import 'package:cook_instead/feed_element.dart';
+import 'package:cook_instead/domain/feed_element.dart';
 
 class Info extends FeedElement {
   List<String> images = [];

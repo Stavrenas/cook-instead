@@ -1,4 +1,4 @@
-import 'package:cook_instead/feed_element.dart';
+import 'package:cook_instead/domain/feed_element.dart';
 
 class Recipe extends FeedElement {
   List<String> images = [];
@@ -12,12 +12,16 @@ class Recipe extends FeedElement {
   String color = "#FFA500";
   List<String> tags = [];
 
-  Recipe(this.title, this.subtitle, this.maintext, this.ingredients,
+  Recipe(this.images,this.title, this.subtitle, this.maintext, this.ingredients,
       this.description, this.createdAt, this.color, this.tags);
 
   @override
   factory Recipe.fromJson(dynamic json) {
     return Recipe(
+        json['images']
+            .map((element) => element.toString())
+            .cast<String>()
+            .toList(),
         json['title'] as String,
         json['subtitle'] as String,
         json['maintext'] as String,

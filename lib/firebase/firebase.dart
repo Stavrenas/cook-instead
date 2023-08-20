@@ -1,7 +1,7 @@
-import 'package:cook_instead/feed_element.dart';
-import 'package:cook_instead/firebase_options.dart';
-import 'package:cook_instead/recipe.dart';
-import 'package:cook_instead/info.dart';
+import 'package:cook_instead/domain/feed_element.dart';
+import 'package:cook_instead/firebase/firebase_options.dart';
+import 'package:cook_instead/domain/recipe.dart';
+import 'package:cook_instead/domain/info.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:convert';
