@@ -50,41 +50,34 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double indent = 50.0;
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Column(
-        children: [
-          FutureBuilder<List<Recipe>>(
-            future: readRecipes(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                Size screenSize = MediaQuery.of(context).size;
-                return SizedBox(
-                  height: screenSize.height,
-                  width: screenSize.width,
-                  child: ListView.builder(
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (context, index) {
-                      return RecipeShortWidget(recipe: snapshot.data![index]);
-                    },
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-              return const CircularProgressIndicator();
-            },
-          ),
-        ],
+      body: FutureBuilder<List<Recipe>>(
+        future: readRecipes(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            Size screenSize = MediaQuery.of(context).size;
+            return SizedBox(
+              height: screenSize.height,
+              width: screenSize.width,
+              child: ListView.builder(
+                itemCount: snapshot.data?.length,
+                itemBuilder: (context, index) {
+                  return RecipeShortWidget(recipe: snapshot.data![index]);
+                },
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          return const CircularProgressIndicator();
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
