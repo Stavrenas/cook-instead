@@ -71,15 +71,10 @@ class RecipeShortWidget extends StatelessWidget {
               ],
             ),
             Divider(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(recipe.description),
-                Wrap(
-                  children: _buildTags(),
-                )
-              ],
-            ),
+            Text(recipe.description),
+            Wrap(
+              children: _buildTags(),
+            )
           ],
         ),
       ),

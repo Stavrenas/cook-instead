@@ -1,19 +1,12 @@
-import 'package:cook_instead/domain/feed_element.dart';
-import 'package:cook_instead/firebase/firebase_options.dart';
 import 'package:cook_instead/domain/recipe.dart';
 import 'package:cook_instead/domain/info.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:convert';
 
 final storage =
     FirebaseStorage.instanceFor(bucket: "gs://cook-instead.appspot.com");
 
-
 Future<List<Recipe>> readRecipes() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   List<Recipe> recipes = [];
   final recipeFolders = await storage.ref().child("recipes").listAll();
   for (var folder in recipeFolders.prefixes) {
@@ -36,9 +29,6 @@ Future<List<Recipe>> readRecipes() async {
 }
 
 Future<List<Info>> readInfos() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   List<Info> infos = [];
   final listResult = await storage.ref().child("didyouknow").listAll();
   for (var folder in listResult.prefixes) {
@@ -80,4 +70,3 @@ Future<List<Info>> readInfos() async {
 //   }
 //   return elements;
 // }
-
