@@ -50,25 +50,28 @@ class RecipeShortWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Container(
-                  height: 50.0,
-                  width: 50.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(recipe.images[0]),
-                      fit: BoxFit.cover,
+            Container(
+              color: Color(int.parse(recipe.color, radix: 16)).withOpacity(0.5),
+              child: Row(
+                children: [
+                  Container(
+                    height: 50.0,
+                    width: 50.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(recipe.images[0]),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Text(recipe.title,
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color(int.parse(recipe.color, radix: 16)),
-                    )),
-              ],
+                  Text(recipe.title,
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )),
+                ],
+              ),
             ),
             Divider(),
             Text(recipe.description),

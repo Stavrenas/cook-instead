@@ -21,6 +21,17 @@ Future<List<Recipe>> readRecipes() async {
         final recipeJson = utf8.decode(filedata);
         final recipeDynamic = jsonDecode(recipeJson);
         final recipe = Recipe.fromJson(recipeDynamic);
+
+        //parse image urls from recipe image names
+        final imageUrls = <String>[];
+        for (var image in files.items) {
+          for (var name in recipe.images) {
+            if (image.name == name) {
+              final imageUrl = await image.getDownloadURL();
+              imageUrls.add(imageUrl);
+            }
+          }
+        }
         recipes.add(recipe);
       }
     }
