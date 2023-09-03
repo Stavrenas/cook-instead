@@ -32,6 +32,7 @@ Future<List<Recipe>> readRecipes() async {
             }
           }
         }
+        recipe.imagesUrls = imageUrls;
         recipes.add(recipe);
       }
     }

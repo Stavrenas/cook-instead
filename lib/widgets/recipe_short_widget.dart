@@ -42,37 +42,43 @@ class RecipeShortWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-// Return a Scaffold widget that contains the recipe details
+    var imageDims = 150.0;
+    var padding = 16.0;
+    var elevation = 4.0;
     return Card(
-      elevation: 4.0,
+      elevation: elevation,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: Color(int.parse(recipe.color, radix: 16)).withOpacity(0.5),
-              child: Row(
-                children: [
-                  Container(
-                    height: 50.0,
-                    width: 50.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(recipe.images[0]),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Text(recipe.title,
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      )),
-                ],
-              ),
-            ),
+                color:
+                    Color(int.parse(recipe.color, radix: 16)).withOpacity(0.5),
+                child: Row(children: [
+                  if (recipe.imagesUrls.isNotEmpty) ...[
+                    Row(children: [
+                      Image.network(recipe.imagesUrls[0],
+                          height: (MediaQuery.of(context).size.width) / 2 -
+                              padding -
+                              elevation,
+                          width: (MediaQuery.of(context).size.width) / 2 -
+                              padding -
+                              elevation),
+                      SizedBox(
+                        width: (MediaQuery.of(context).size.width) / 2 -
+                            padding -
+                            elevation,
+                        height: (MediaQuery.of(context).size.width) / 2 -
+                            padding -
+                            elevation,
+                        child: TitleText(recipe.title),
+                      )
+                    ]),
+                  ] else ...[
+                    TitleText(recipe.title)
+                  ],
+                ])),
             Divider(),
             Text(recipe.description),
             Wrap(
@@ -81,6 +87,19 @@ class RecipeShortWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Text TitleText(String title) {
+    return Text(
+      title,
+      style: TextStyle(
+        fontSize: 24.0,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Comic Sans MS',
+        color: Colors.white,
+      ),
+      textAlign: TextAlign.center,
     );
   }
 }
