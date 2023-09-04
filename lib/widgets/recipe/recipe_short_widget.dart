@@ -1,6 +1,8 @@
+import 'package:cook_instead/widgets/recipe/tag.dart';
+import 'package:cook_instead/widgets/recipe/title_text.dart';
 import 'package:flutter/material.dart';
 
-import '../domain/recipe.dart';
+import '../../domain/recipe.dart';
 
 class RecipeShortWidget extends StatelessWidget {
   final Recipe recipe;
@@ -13,18 +15,8 @@ class RecipeShortWidget extends StatelessWidget {
     for (String tag in recipe.tags) {
       widgets.add(
         Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Chip(
-            label: Text(
-              tag,
-              style: TextStyle(
-                fontSize: 10.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            backgroundColor: Color(int.parse(recipe.color, radix: 16)),
-          ),
+          padding: const EdgeInsets.only(right: 4.0),
+          child: Tag(tag: tag, color: recipe.color),
         ),
       );
     }
@@ -68,11 +60,11 @@ class RecipeShortWidget extends StatelessWidget {
                         height: (MediaQuery.of(context).size.width) / 2 -
                             padding -
                             elevation,
-                        child: TitleText(recipe.title),
+                        child: TitleText(title: recipe.title),
                       )
                     ]),
                   ] else ...[
-                    TitleText(recipe.title),
+                    TitleText(title: recipe.title),
                   ],
                 ])),
             Divider(),
@@ -85,17 +77,7 @@ class RecipeShortWidget extends StatelessWidget {
       ),
     );
   }
-
-  Text TitleText(String title) {
-    return Text(
-      title,
-      style: TextStyle(
-        fontSize: 30.0,
-        fontFamily: 'Jetskisinsummer',
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-      ),
-      textAlign: TextAlign.center,
-    );
-  }
 }
+
+
+

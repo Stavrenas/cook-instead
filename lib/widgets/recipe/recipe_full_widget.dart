@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../domain/recipe.dart';
+import '../../domain/recipe.dart';
 
 class RecipeFullWidget extends StatelessWidget {
 // The Recipe object to display

@@ -1,5 +1,5 @@
-import 'package:cook_instead/widgets/recipe_full_widget.dart';
-import 'package:cook_instead/widgets/recipe_short_widget.dart';
+import 'package:cook_instead/widgets/recipe/recipe_full_widget.dart';
+import 'package:cook_instead/widgets/recipe/recipe_short_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cook_instead/firebase/firebase.dart';
