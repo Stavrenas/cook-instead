@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/recipe.dart';
 
 class Tag extends StatelessWidget {
   const Tag({

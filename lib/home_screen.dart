@@ -1,6 +1,5 @@
 import 'package:cook_instead/abstract_screen.dart';
 import 'package:cook_instead/widgets/recipe/recipe_short_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'domain/recipe.dart';
