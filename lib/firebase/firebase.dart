@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:cook_instead/domain/recipe.dart';
 import 'package:cook_instead/domain/info.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -21,16 +23,20 @@ Future<List<Recipe>> readRecipes() async {
         final recipeJson = utf8.decode(filedata);
         final recipeDynamic = jsonDecode(recipeJson);
         final recipe = Recipe.fromJson(recipeDynamic);
-
+        final HashMap<String, String> imageMap = HashMap();
         //parse image urls from recipe image names
         final imageUrls = <String>[];
         for (var image in files.items) {
           for (var name in recipe.images) {
             if (image.name == name) {
               final imageUrl = await image.getDownloadURL();
-              imageUrls.add(imageUrl);
+              imageMap.putIfAbsent(image.name, () => imageUrl);
             }
           }
+        }
+        // Get urls from map to keep the same order as in recipe.images
+        for (var name in recipe.images) {
+          imageUrls.add(imageMap[name]!);
         }
         recipe.imagesUrls = imageUrls;
         recipes.add(recipe);
