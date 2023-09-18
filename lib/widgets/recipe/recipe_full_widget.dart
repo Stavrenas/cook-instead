@@ -1,35 +1,13 @@
+import 'package:cook_instead/widgets/recipe/ingredient_widget.dart';
+import 'package:cook_instead/widgets/recipe/title_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/recipe.dart';
 
 class RecipeFullWidget extends StatelessWidget {
-
   final Recipe recipe;
 
-  RecipeFullWidget({required this.recipe});
-
-  List<Widget> _buildIngredients() {
-
-    List<Widget> widgets = [];
-
-    for (String ingredient in recipe.ingredients) {
-      widgets.add(
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            ingredient,
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      );
-    }
-
-    return widgets;
-  }
+  const RecipeFullWidget({required this.recipe});
 
   List<Widget> _buildTags() {
     List<Widget> widgets = [];
@@ -56,129 +34,60 @@ class RecipeFullWidget extends StatelessWidget {
     return widgets;
   }
 
+  List<Widget> _buildImages(double screenWidth) {
+    return [
+      for (String imageUrl in recipe.imagesUrls)
+        SizedBox(
+          width: screenWidth,
+          height: screenWidth,
+          child: Image.network(imageUrl),
+        )
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    Size screenSize = MediaQuery.of(context).size;
-    return SizedBox(
-      height: screenSize.width - 50,
-      width: screenSize.width - 50,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(recipe.title),
-          backgroundColor: Color(int.parse(recipe.color, radix: 16)),
-        ),
-        body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 200.0,
-                width: 200.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(recipe.images[0]),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-
+    var screenSize = MediaQuery.of(context).size;
+    var padding = 16.0;
+    return Padding(
+        padding: EdgeInsets.all(padding),
+        child: SingleChildScrollView(
+            child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SizedBox(
+              height: screenSize.width,
+              child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: _buildImages(screenSize.width)),
+            ),
+            TitleText(
+              title: recipe.subtitle,
+              color: Colors.black,
+            ),
+            Text(recipe.description),
+            Padding(padding: EdgeInsets.only(top: padding)),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              SizedBox(
+                  width: screenSize.width / 2 - 2 * padding,
+                  height: screenSize.width / 2,
+                  child: IngredientWidget(
+                    ingredients: recipe.ingredients,
+                    color: Color(int.parse(recipe.color, radix: 16)),
+                  )),
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      recipe.subtitle,
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color(int.parse(recipe.color, radix: 16)),
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
-                    Text(
+                  padding: EdgeInsets.all(padding),
+                  child: SizedBox(
+                    width: screenSize.width / 2 - 2 * padding,
+                    height: screenSize.width / 2,
+                    child: Text(
                       recipe.maintext,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.black87,
-                      ),
+                      softWrap: true,
                     ),
-                  ],
-                ),
-              ),
-              Divider(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Ingredients',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color(int.parse(recipe.color, radix: 16)),
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
-                    Wrap(
-                      children: _buildIngredients(),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Description',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color(int.parse(recipe.color, radix: 16)),
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
-                    Text(
-                      recipe.description,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.black87,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Tags',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color(int.parse(recipe.color, radix: 16)),
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
-                    Wrap(
-                      children: _buildTags(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-      ),
-    );
+                  ))
+            ]),
+          ],
+        )));
   }
 }

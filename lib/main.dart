@@ -1,8 +1,9 @@
+import 'package:cook_instead/pages/recipe_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'firebase_options.dart';
-import 'home_screen.dart';
+import 'util/firebase_options.dart';
+import 'pages/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,10 +28,12 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: MyHomePage(
-          title: 'Cook Instead',
-          subtitle: '',
-          content: const RecipeList(),
-        ));
+        initialRoute: '/home',
+        routes: {
+          '/home': (context) => MyHomePage(),
+          // When navigating to the "/second" route, build the SecondScreen widget.
+          '/recipe': (context) => RecipePage(),
+        },
+        home: MyHomePage());
   }
 }

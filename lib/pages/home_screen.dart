@@ -1,13 +1,26 @@
-import 'package:cook_instead/abstract_screen.dart';
 import 'package:cook_instead/widgets/recipe/recipe_short_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'domain/recipe.dart';
-import 'firebase/firebase.dart';
+import '../domain/recipe.dart';
+import '../util/firebase/firebase.dart';
+import '../widgets/common/app_bar.dart';
 
-class MyHomePage extends MyAbstractPage {
-  const MyHomePage({super.key, required super.title, required super.subtitle, required super.content});
+class MyHomePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _MyHomePageState();
+}
 
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: AppBarTitle('Cook Instead').build(context),
+      ),
+      body: RecipeList(),
+    );
+  }
 }
 
 class RecipeList extends StatelessWidget {

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TitleText extends StatelessWidget {
-  const TitleText({
-    super.key,
-    required this.title,
-  });
+  const TitleText({super.key, required this.title, this.color = Colors.white});
 
   final String title;
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class TitleText extends StatelessWidget {
         fontSize: 30.0,
         fontFamily: 'Jetskisinsummer',
         fontWeight: FontWeight.bold,
-        color: Colors.white,
+        color: color,
       ),
       textAlign: TextAlign.center,
     );
